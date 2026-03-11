@@ -228,11 +228,11 @@ body { font-family: 'Outfit', sans-serif; background: var(--surface); color: var
 
   <div class="invoice-box" id="invoiceBox">
     <div class="inv-header">
-      <div>
-        <div class="inv-label">✨ Datos extraídos de la factura</div>
-        <div class="inv-empresa" id="invEmpresa">—</div>
+      <div style="flex:1; min-width:0;">
+        <div class="inv-label">✨ Datos extraídos — edita si es necesario</div>
+        <input id="invEmpresa" class="input" style="margin-top:6px; font-size:16px; font-weight:800; border-color:#6ee7b7; background:white;" placeholder="Nombre del cliente…">
       </div>
-      <div class="inv-total-badge" id="invTotal" style="display:none"></div>
+      <div class="inv-total-badge" id="invTotal" style="display:none; margin-left:10px;"></div>
     </div>
     <div class="inv-grid" id="invGrid"></div>
     <div class="inv-extras">
@@ -458,7 +458,7 @@ function inferClient(name) {
 function showExtracted() {
   document.getElementById('analyzeStatus').style.display = 'none';
   const e = pendingExtract;
-  document.getElementById('invEmpresa').textContent = e.empresa || '—';
+  document.getElementById('invEmpresa').value = e.empresa || '';
   const totalEl = document.getElementById('invTotal');
   if (e.total && e.total !== 'null') { totalEl.textContent = e.total; totalEl.style.display = 'block'; }
   else totalEl.style.display = 'none';
@@ -501,9 +501,10 @@ function resetExtract() {
 function agregarEntrega() {
   if (!pendingExtract) return;
   const e = pendingExtract;
+  const clienteNombre = document.getElementById('invEmpresa').value.trim() || e.empresa || 'Cliente';
   const entrega = {
     id: Date.now(),
-    cliente: e.empresa || 'Cliente',
+    cliente: clienteNombre,
     emisor: e.emisor, noFactura: e.noFactura || '—',
     ordenCompra: e.ordenCompra, fechaFactura: e.fecha,
     fechaVencimiento: e.fechaVencimiento,
