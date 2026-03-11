@@ -11,336 +11,182 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #0d1117;
-  --ink2: #1c2333;
-  --ink3: #2d3748;
-  --muted: #6b7280;
-  --muted2: #9ca3af;
-  --line: #e5e7eb;
-  --line2: #f3f4f6;
-  --white: #ffffff;
-  --surface: #f9fafb;
-
-–accent: #f59e0b;
-–accent-dim: #fef3c7;
-–accent-dark: #d97706;
-
-–blue: #2563eb;
-–blue-dim: #eff6ff;
-–green: #059669;
-–green-dim: #ecfdf5;
-–red: #dc2626;
-–red-dim: #fef2f2;
-–orange: #ea580c;
-–orange-dim: #fff7ed;
-
-–r: 14px;
-–rs: 9px;
-–shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.06);
-–shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+  --ink: #0d1117; --ink2: #1c2333; --ink3: #2d3748;
+  --muted: #6b7280; --muted2: #9ca3af;
+  --line: #e5e7eb; --line2: #f3f4f6;
+  --white: #ffffff; --surface: #f9fafb;
+  --accent: #f59e0b; --accent-dim: #fef3c7; --accent-dark: #d97706;
+  --blue: #2563eb; --blue-dim: #eff6ff;
+  --green: #059669; --green-dim: #ecfdf5;
+  --red: #dc2626; --red-dim: #fef2f2;
+  --purple: #7c3aed; --purple-dim: #ede9fe;
+  --r: 14px; --rs: 9px;
+  --shadow: 0 1px 4px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.06);
 }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Outfit', sans-serif; background: var(--surface); color: var(--ink); min-height: 100vh; max-width: 440px; margin: 0 auto; overflow-x: hidden; }
 
-- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-body {
-font-family: ‘Outfit’, sans-serif;
-background: var(–surface);
-color: var(–ink);
-min-height: 100vh;
-max-width: 440px;
-margin: 0 auto;
-position: relative;
-overflow-x: hidden;
-}
-
-/* ── HEADER ── */
-.topbar {
-background: var(–ink);
-color: white;
-padding: 14px 18px 12px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-position: sticky; top: 0; z-index: 200;
-}
+.topbar { background: var(–ink); color: white; padding: 14px 18px 12px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 200; }
 .topbar-brand { display: flex; align-items: center; gap: 10px; }
-.topbar-logo {
-width: 34px; height: 34px; background: var(–accent);
-border-radius: 9px; display: flex; align-items: center; justify-content: center;
-font-size: 17px; flex-shrink: 0;
-}
+.topbar-logo { width: 34px; height: 34px; background: var(–accent); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
 .topbar-name { font-size: 17px; font-weight: 800; letter-spacing: -.3px; }
-.topbar-sub { font-size: 10px; color: rgba(255,255,255,.45); font-weight: 400; margin-top: 1px; }
-.mode-toggle {
-display: flex; background: rgba(255,255,255,.1); border-radius: 8px; overflow: hidden; gap: 0;
-}
-.mode-btn {
-padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: ‘Outfit’, sans-serif;
-border: none; background: transparent; color: rgba(255,255,255,.5);
-cursor: pointer; transition: all .2s; letter-spacing: .3px;
-}
+.topbar-sub { font-size: 10px; color: rgba(255,255,255,.45); margin-top: 1px; }
+.mode-toggle { display: flex; background: rgba(255,255,255,.1); border-radius: 8px; overflow: hidden; }
+.mode-btn { padding: 5px 12px; font-size: 11px; font-weight: 700; font-family: ‘Outfit’, sans-serif; border: none; background: transparent; color: rgba(255,255,255,.5); cursor: pointer; transition: all .2s; }
 .mode-btn.active { background: var(–accent); color: var(–ink); border-radius: 7px; }
 
-/* ── SCREENS ── */
 .view { display: none; padding: 16px 14px 100px; }
 .view.show { display: block; }
 
-/* ── CARDS ── */
-.card {
-background: var(–white);
-border-radius: var(–r);
-border: 1px solid var(–line);
-box-shadow: var(–shadow);
-margin-bottom: 12px;
-overflow: hidden;
-}
-.card-head {
-padding: 13px 15px 11px;
-border-bottom: 1px solid var(–line2);
-display: flex; align-items: center; gap: 10px;
-}
-.card-ico {
-width: 34px; height: 34px; border-radius: 9px;
-display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
-}
+.card { background: var(–white); border-radius: var(–r); border: 1px solid var(–line); box-shadow: var(–shadow); margin-bottom: 12px; overflow: hidden; }
+.card-head { padding: 13px 15px 11px; border-bottom: 1px solid var(–line2); display: flex; align-items: center; gap: 10px; }
+.card-ico { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 .card-title { font-size: 14px; font-weight: 700; }
 .card-desc { font-size: 11px; color: var(–muted); margin-top: 1px; }
 .card-body { padding: 14px 15px; }
 
-/* ── UPLOAD ── */
-.drop-zone {
-border: 2px dashed var(–line);
-border-radius: var(–rs);
-padding: 24px 14px;
-text-align: center;
-cursor: pointer;
-transition: all .2s;
-background: var(–surface);
-}
+.drop-zone { border: 2px dashed var(–line); border-radius: var(–rs); padding: 24px 14px; text-align: center; cursor: pointer; transition: all .2s; background: var(–surface); }
 .drop-zone:hover { border-color: var(–accent); background: var(–accent-dim); }
-.drop-zone.active-drop { border-color: var(–accent); background: var(–accent-dim); }
 .dz-icon { font-size: 28px; margin-bottom: 8px; }
 .dz-title { font-size: 13px; font-weight: 700; color: var(–ink3); margin-bottom: 3px; }
 .dz-sub { font-size: 11px; color: var(–muted2); }
 
-/* ── ANALYZING ── */
-.pill {
-display: inline-flex; align-items: center; gap: 6px;
-padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
-}
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; }
 .pill-amber { background: var(–accent-dim); color: var(–accent-dark); border: 1px solid #fcd34d; }
-.pill-green { background: var(–green-dim); color: var(–green); border: 1px solid #6ee7b7; }
-.pill-blue  { background: var(–blue-dim);  color: var(–blue);  border: 1px solid #bfdbfe; }
-.pill-red   { background: var(–red-dim);   color: var(–red);   border: 1px solid #fca5a5; }
 .spin { width: 11px; height: 11px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; display: inline-block; }
 
-/* ── EXTRACTED INFO ── */
-.extract-box {
-margin-top: 12px; padding: 13px 14px;
-background: var(–green-dim); border: 1px solid #a7f3d0;
-border-radius: var(–rs); display: none; animation: fadeUp .3s ease;
-}
-.extract-box.show { display: block; }
-.extract-label { font-size: 10px; font-weight: 800; color: var(–green); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 8px; }
-.extract-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.extract-item { }
-.extract-key { font-size: 10px; color: var(–muted); font-weight: 500; }
-.extract-val { font-size: 13px; font-weight: 700; color: var(–ink); margin-top: 1px; }
+/* INVOICE BOX */
+.invoice-box { margin-top: 12px; background: var(–green-dim); border: 1px solid #a7f3d0; border-radius: var(–rs); display: none; animation: fadeUp .3s ease; overflow: hidden; }
+.invoice-box.show { display: block; }
+.inv-header { padding: 12px 14px 10px; border-bottom: 1px solid #6ee7b780; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.inv-label { font-size: 10px; font-weight: 800; color: var(–green); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 3px; }
+.inv-empresa { font-size: 17px; font-weight: 800; color: var(–ink); line-height: 1.2; }
+.inv-total-badge { background: var(–green); color: white; border-radius: 10px; padding: 5px 12px; font-size: 14px; font-weight: 800; white-space: nowrap; flex-shrink: 0; }
+.inv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px 14px; }
+.inv-field { }
+.inv-field.full { grid-column: 1 / -1; }
+.inv-key { font-size: 9px; color: var(–muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 2px; }
+.inv-val { font-size: 12px; font-weight: 700; color: var(–ink); word-break: break-word; }
+.inv-val.mono { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; }
+.inv-extras { padding: 0 14px 14px; display: flex; flex-direction: column; gap: 10px; }
 
-/* ── FORM ── */
 .form-row { margin-bottom: 12px; }
 .label { font-size: 11px; font-weight: 700; color: var(–muted); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 5px; display: block; }
-.input {
-width: 100%; padding: 10px 13px; border: 1.5px solid var(–line);
-border-radius: var(–rs); font-size: 14px; font-family: ‘Outfit’, sans-serif;
-color: var(–ink); background: var(–white); transition: border-color .15s;
--webkit-appearance: none;
-}
+.input { width: 100%; padding: 10px 13px; border: 1.5px solid var(–line); border-radius: var(–rs); font-size: 14px; font-family: ‘Outfit’, sans-serif; color: var(–ink); background: var(–white); transition: border-color .15s; -webkit-appearance: none; }
 .input:focus { outline: none; border-color: var(–accent); }
 .input::placeholder { color: var(–muted2); }
 
-/* ── BUTTONS ── */
-.btn {
-width: 100%; padding: 13px; border-radius: var(–rs);
-font-size: 14px; font-weight: 700; font-family: ‘Outfit’, sans-serif;
-border: none; cursor: pointer; transition: all .15s;
-display: flex; align-items: center; justify-content: center; gap: 7px;
-}
+.btn { width: 100%; padding: 13px; border-radius: var(–rs); font-size: 14px; font-weight: 700; font-family: ‘Outfit’, sans-serif; border: none; cursor: pointer; transition: all .15s; display: flex; align-items: center; justify-content: center; gap: 7px; }
 .btn:active { transform: scale(.98); }
 .btn-amber { background: var(–accent); color: var(–ink); box-shadow: 0 4px 14px rgba(245,158,11,.3); }
 .btn-amber:disabled { background: var(–line); color: var(–muted2); box-shadow: none; cursor: not-allowed; transform: none; }
 .btn-green { background: var(–green); color: white; box-shadow: 0 4px 14px rgba(5,150,105,.25); }
 .btn-outline { background: white; color: var(–ink); border: 1.5px solid var(–line); }
-.btn-ghost { background: transparent; color: var(–muted); border: none; font-size: 12px; padding: 8px; width: auto; }
+.btn-back { flex: 0 0 44px; width: 44px; padding: 13px 0; background: white; border: 1.5px solid var(–line); color: var(–muted); border-radius: var(–rs); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
 .btn-row { display: flex; gap: 8px; }
-.btn-back { flex: 0 0 44px; padding: 13px 0; width: 44px; background: white; border: 1.5px solid var(–line); color: var(–muted); border-radius: var(–rs); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all .15s; }
-.btn-back:active { transform: scale(.97); }
 
-/* ── QUEUE LIST ── */
-.queue-header {
-display: flex; align-items: center; justify-content: space-between;
-margin-bottom: 10px;
-}
+.queue-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .section-title { font-size: 11px; font-weight: 800; color: var(–muted); letter-spacing: .8px; text-transform: uppercase; }
-.queue-count {
-font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px;
-background: var(–accent-dim); color: var(–accent-dark);
-}
+.queue-count { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 20px; background: var(–accent-dim); color: var(–accent-dark); }
 
-.queue-item {
-background: var(–white); border: 1px solid var(–line); border-radius: var(–r);
-padding: 13px 14px; margin-bottom: 9px; box-shadow: var(–shadow);
-display: flex; align-items: center; gap: 12px;
-animation: fadeUp .25s ease both;
-}
-.qi-dot {
-width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-display: flex; align-items: center; justify-content: center; font-size: 18px;
-}
+.queue-item { background: var(–white); border: 1px solid var(–line); border-radius: var(–r); padding: 13px 14px; margin-bottom: 9px; box-shadow: var(–shadow); display: flex; align-items: center; gap: 12px; animation: fadeUp .25s ease both; }
+.qi-dot { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 18px; }
 .qi-info { flex: 1; min-width: 0; }
-.qi-client { font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.qi-client { font-size: 14px; font-weight: 700; }
 .qi-meta { font-size: 11px; color: var(–muted); margin-top: 2px; }
-.qi-factura { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–muted2); margin-top: 1px; }
-.qi-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-.qi-del { background: none; border: none; font-size: 16px; color: var(–muted2); cursor: pointer; padding: 2px; }
+.qi-fac { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–muted2); margin-top: 1px; }
+.qi-right { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+.qi-del { background: none; border: none; font-size: 16px; color: var(–muted2); cursor: pointer; }
 
-/* ── STATUS BADGES ── */
-.status {
-font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 20px; letter-spacing: .3px; text-transform: uppercase;
-}
+.status { font-size: 10px; font-weight: 800; padding: 3px 9px; border-radius: 20px; letter-spacing: .3px; text-transform: uppercase; }
 .status-pending { background: var(–accent-dim); color: var(–accent-dark); }
 .status-done    { background: var(–green-dim);  color: var(–green); }
 
-/* ── DRIVER DELIVERY ITEM ── */
-.dlv-item {
-background: var(–white); border: 1px solid var(–line); border-radius: var(–r);
-margin-bottom: 9px; box-shadow: var(–shadow); overflow: hidden;
-cursor: pointer; transition: all .15s;
-}
+.dlv-item { background: var(–white); border: 1px solid var(–line); border-radius: var(–r); margin-bottom: 9px; box-shadow: var(–shadow); overflow: hidden; cursor: pointer; transition: all .15s; }
 .dlv-item:active { transform: scale(.99); }
-.dlv-item.done { opacity: .65; }
+.dlv-item.done { opacity: .6; }
 .dlv-top { padding: 13px 14px; display: flex; align-items: center; gap: 12px; }
-.dlv-num {
-width: 32px; height: 32px; border-radius: 8px; background: var(–ink2);
-color: white; display: flex; align-items: center; justify-content: center;
-font-size: 13px; font-weight: 800; flex-shrink: 0;
-}
+.dlv-num { width: 32px; height: 32px; border-radius: 8px; background: var(–ink2); color: white; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
 .dlv-num.done { background: var(–green); }
 .dlv-client { font-size: 15px; font-weight: 700; }
-.dlv-addr { font-size: 11px; color: var(–muted); margin-top: 2px; }
+.dlv-sub { font-size: 11px; color: var(–muted); margin-top: 2px; }
 .dlv-fac { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–muted2); margin-top: 2px; }
-.dlv-arrow { margin-left: auto; color: var(–muted2); font-size: 18px; }
 
-/* ── SIGN FLOW ── */
 .sig-wrap { position: relative; }
-#sigCanvas {
-width: 100%; height: 170px; border: 1.5px solid var(–line); border-radius: var(–rs);
-background: white; display: block; cursor: crosshair; touch-action: none;
-}
-.sig-hint {
-position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
-text-align: center; pointer-events: none; opacity: .35;
-}
+#sigCanvas { width: 100%; height: 170px; border: 1.5px solid var(–line); border-radius: var(–rs); background: white; display: block; cursor: crosshair; touch-action: none; }
+.sig-hint { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); text-align: center; pointer-events: none; opacity: .35; }
 .sig-hint-icon { font-size: 26px; }
 .sig-hint-text { font-size: 11px; color: var(–muted); font-weight: 600; margin-top: 4px; }
 .sig-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; }
-.sig-clear { font-size: 11px; font-weight: 700; color: var(–red); background: none; border: none; cursor: pointer; padding: 4px 6px; }
+.sig-clear { font-size: 11px; font-weight: 700; color: var(–red); background: none; border: none; cursor: pointer; }
 
-/* ── PROGRESS BAR ── */
 .progress-wrap { background: var(–line2); border-radius: 10px; height: 6px; overflow: hidden; margin-bottom: 16px; }
 .progress-bar { height: 100%; background: var(–accent); border-radius: 10px; transition: width .4s ease; }
 
-/* ── EMPTY ── */
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
+.stat-box { background: white; border: 1px solid var(–line); border-radius: var(–rs); padding: 12px 10px; text-align: center; box-shadow: var(–shadow); }
+.stat-n { font-size: 26px; font-weight: 900; letter-spacing: -.5px; }
+.stat-l { font-size: 10px; color: var(–muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; margin-top: 2px; }
+
+/* FOLDERS */
+.folder-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.folder-tab { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1.5px solid var(–line); background: white; color: var(–muted); cursor: pointer; transition: all .15s; display: flex; align-items: center; gap: 5px; }
+.folder-tab.active { background: var(–ink); color: white; border-color: var(–ink); }
+.folder-count { padding: 1px 6px; border-radius: 10px; font-size: 10px; background: var(–line2); color: var(–muted); }
+.folder-tab.active .folder-count { background: rgba(255,255,255,.2); color: white; }
+
+.sign-summary { background: var(–surface); border: 1px solid var(–line); border-radius: var(–rs); margin-bottom: 14px; overflow: hidden; }
+.ss-head { padding: 10px 14px 8px; background: var(–ink); color: white; }
+.ss-empresa { font-size: 15px; font-weight: 800; }
+.ss-sub-total { font-size: 12px; color: var(–accent); font-weight: 700; margin-top: 2px; }
+.ss-body { padding: 8px 14px; }
+.ss-row { display: flex; justify-content: space-between; padding: 5px 0; font-size: 12px; border-bottom: 1px solid var(–line2); }
+.ss-row:last-child { border: none; }
+.ss-k { color: var(–muted); flex-shrink: 0; margin-right: 8px; }
+.ss-v { font-weight: 700; text-align: right; }
+
 .empty { text-align: center; padding: 48px 20px; }
 .empty-ico { font-size: 44px; opacity: .25; margin-bottom: 12px; }
 .empty-title { font-size: 15px; font-weight: 700; color: var(–muted); margin-bottom: 5px; }
 .empty-sub { font-size: 12px; color: var(–muted2); }
 
-/* ── SUCCESS OVERLAY ── */
-.success-overlay {
-display: none; position: fixed; inset: 0; background: rgba(255,255,255,.97);
-z-index: 500; flex-direction: column; align-items: center; justify-content: center; padding: 28px;
-text-align: center;
-}
+.success-overlay { display: none; position: fixed; inset: 0; background: rgba(255,255,255,.97); z-index: 500; flex-direction: column; align-items: center; justify-content: center; padding: 28px; text-align: center; overflow-y: auto; }
 .success-overlay.show { display: flex; animation: fadeIn .3s ease; }
-.so-check {
-width: 72px; height: 72px; background: var(–green); border-radius: 50%;
-display: flex; align-items: center; justify-content: center; font-size: 32px;
-margin-bottom: 18px; box-shadow: 0 8px 24px rgba(5,150,105,.3);
-animation: popIn .35s ease .05s both;
-}
-.so-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; letter-spacing: -.3px; }
-.so-sub { font-size: 13px; color: var(–muted); margin-bottom: 22px; line-height: 1.55; }
-.so-receipt {
-background: var(–surface); border: 1px solid var(–line); border-radius: var(–r);
-padding: 14px; width: 100%; max-width: 320px; margin-bottom: 22px; text-align: left;
-}
+.so-check { width: 72px; height: 72px; background: var(–green); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; margin-bottom: 18px; box-shadow: 0 8px 24px rgba(5,150,105,.3); animation: popIn .35s ease .05s both; flex-shrink: 0; }
+.so-title { font-size: 24px; font-weight: 900; margin-bottom: 6px; }
+.so-sub { font-size: 13px; color: var(–muted); margin-bottom: 8px; line-height: 1.55; }
+.so-folder { display: inline-flex; align-items: center; gap: 6px; background: var(–green-dim); color: var(–green); border: 1px solid #6ee7b7; border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 700; margin-bottom: 18px; }
+.so-receipt { background: var(–surface); border: 1px solid var(–line); border-radius: var(–r); padding: 14px; width: 100%; max-width: 320px; margin-bottom: 22px; text-align: left; }
 .so-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(–line2); font-size: 12px; }
 .so-row:last-child { border: none; }
 .so-key { color: var(–muted); }
 .so-val { font-weight: 700; text-align: right; }
 
-/* ── TOAST ── */
-.toast {
-position: fixed; bottom: 88px; left: 50%; transform: translateX(-50%) translateY(60px);
-background: var(–ink); color: white; padding: 10px 18px; border-radius: 24px;
-font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; transition: all .28s ease;
-white-space: nowrap; pointer-events: none;
-}
+.toast { position: fixed; bottom: 88px; left: 50%; transform: translateX(-50%) translateY(60px); background: var(–ink); color: white; padding: 10px 18px; border-radius: 24px; font-size: 13px; font-weight: 600; z-index: 999; opacity: 0; transition: all .28s ease; white-space: nowrap; pointer-events: none; }
 .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 .toast.ok { background: var(–green); }
 .toast.err { background: var(–red); }
 
-/* ── BOTTOM NAV ── */
-.bnav {
-position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-width: 100%; max-width: 440px; background: var(–white);
-border-top: 1px solid var(–line); display: flex; padding: 6px 0 10px; z-index: 100;
-}
-.bnav-item {
-flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px;
-font-size: 10px; font-weight: 700; color: var(–muted2); cursor: pointer;
-border: none; background: none; padding: 4px; transition: color .2s; letter-spacing: .3px;
-text-transform: uppercase;
-}
+.bnav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 440px; background: var(–white); border-top: 1px solid var(–line); display: flex; padding: 6px 0 10px; z-index: 100; }
+.bnav-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 700; color: var(–muted2); cursor: pointer; border: none; background: none; padding: 4px; transition: color .2s; letter-spacing: .3px; text-transform: uppercase; }
 .bnav-item.on { color: var(–accent-dark); }
 .bnav-icon { font-size: 20px; }
 
-/* ── ANIMATIONS ── */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 300; align-items: flex-end; }
+.modal-overlay.show { display: flex; }
+.modal { background: white; border-radius: 20px 20px 0 0; padding: 20px; width: 100%; max-height: 85vh; overflow-y: auto; animation: slideUp .3s ease; }
+.modal-handle { width: 36px; height: 4px; background: var(–line); border-radius: 2px; margin: 0 auto 16px; }
+.modal-title { font-size: 17px; font-weight: 800; margin-bottom: 14px; }
+
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes popIn { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-/* ── MISC ── */
-.divider { height: 1px; background: var(–line2); margin: 14px 0; }
-.mono { font-family: ‘JetBrains Mono’, monospace; }
-.text-muted { color: var(–muted); }
-.text-sm { font-size: 12px; }
-.mt8 { margin-top: 8px; }
-.mt12 { margin-top: 12px; }
-
-/* summary detail in sign flow */
-.sign-summary {
-background: var(–surface); border: 1px solid var(–line); border-radius: var(–rs);
-padding: 12px 14px; margin-bottom: 14px;
-}
-.ss-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 12px; border-bottom: 1px solid var(–line2); }
-.ss-row:last-child { border: none; }
-.ss-k { color: var(–muted); }
-.ss-v { font-weight: 700; }
-
-/* stats row */
-.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-.stat-box { background: white; border: 1px solid var(–line); border-radius: var(–rs); padding: 12px 10px; text-align: center; box-shadow: var(–shadow); }
-.stat-n { font-size: 26px; font-weight: 900; letter-spacing: -.5px; }
-.stat-l { font-size: 10px; color: var(–muted); font-weight: 600; text-transform: uppercase; letter-spacing: .4px; margin-top: 2px; }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 </style>
 
 </head>
 <body>
-
-<!-- TOPBAR -->
 
 <div class="topbar">
   <div class="topbar-brand">
@@ -356,54 +202,55 @@ padding: 12px 14px; margin-bottom: 14px;
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     OFICINA — CARGAR FACTURAS
-════════════════════════════════ -->
+<!-- CARGAR -->
 
 <div class="view show" id="v-cargar">
   <div class="card">
     <div class="card-head">
       <div class="card-ico" style="background:#fef3c7">📄</div>
       <div>
-        <div class="card-title">Cargar facturas del día</div>
-        <div class="card-desc">La IA extrae los datos automáticamente</div>
+        <div class="card-title">Cargar factura del día</div>
+        <div class="card-desc">La IA extrae todos los datos automáticamente</div>
       </div>
     </div>
     <div class="card-body">
-      <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileIn').click()">
+      <div class="drop-zone" onclick="document.getElementById('fileIn').click()">
         <div class="dz-icon">📤</div>
-        <div class="dz-title">Toca para subir facturas</div>
-        <div class="dz-sub">PDF, JPG o PNG • puedes subir varios</div>
+        <div class="dz-title">Toca para subir factura</div>
+        <div class="dz-sub">PDF, JPG o PNG</div>
       </div>
-      <input type="file" id="fileIn" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none" onchange="handleFiles(event)">
+      <input type="file" id="fileIn" accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="handleFile(event)">
 
 ```
   <div id="analyzeStatus" style="margin-top:12px; display:none">
-    <div class="pill pill-amber"><span class="spin"></span> Analizando con IA…</div>
+    <div class="pill pill-amber"><span class="spin"></span> Leyendo factura con IA…</div>
   </div>
 
-  <div class="extract-box" id="extractBox">
-    <div class="extract-label">✨ Datos extraídos</div>
-    <div class="extract-grid" id="extractGrid"></div>
-    <div class="divider"></div>
-    <div class="form-row">
-      <label class="label">Dirección de entrega</label>
-      <input class="input" id="inDireccion" placeholder="Calle, colonia, referencia…">
+  <div class="invoice-box" id="invoiceBox">
+    <div class="inv-header">
+      <div>
+        <div class="inv-label">✨ Datos extraídos de la factura</div>
+        <div class="inv-empresa" id="invEmpresa">—</div>
+      </div>
+      <div class="inv-total-badge" id="invTotal" style="display:none"></div>
     </div>
-    <div class="form-row" style="margin-bottom:0">
-      <label class="label">Notas (opcional)</label>
-      <input class="input" id="inNotas" placeholder="Ej: Preguntar por Miguel…">
+    <div class="inv-grid" id="invGrid"></div>
+    <div class="inv-extras">
+      <div>
+        <label class="label">Dirección de entrega</label>
+        <input class="input" id="inDireccion" placeholder="Calle, colonia, referencia…">
+      </div>
+      <div>
+        <label class="label">Notas (opcional)</label>
+        <input class="input" id="inNotas" placeholder="Ej: Preguntar por Miguel…">
+      </div>
     </div>
   </div>
 </div>
 ```
 
   </div>
-
-  <button class="btn btn-amber" id="btnAgregar" onclick="agregarEntrega()" disabled>
-    ＋ Agregar a la lista del día
-  </button>
-
+  <button class="btn btn-amber" id="btnAgregar" onclick="agregarEntrega()" disabled>＋ Agregar a la ruta del día</button>
   <div style="margin-top:20px">
     <div class="queue-header">
       <div class="section-title">Lista de hoy</div>
@@ -413,122 +260,90 @@ padding: 12px 14px; margin-bottom: 14px;
   </div>
 </div>
 
-<!-- ════════════════════════════════
-     REPARTIDOR — LISTA DE ENTREGAS
-════════════════════════════════ -->
+<!-- RUTA -->
 
 <div class="view" id="v-lista">
   <div class="stats-row">
-    <div class="stat-box">
-      <div class="stat-n" id="stTotal">0</div>
-      <div class="stat-l">Total</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-n" id="stPend" style="color:var(--accent-dark)">0</div>
-      <div class="stat-l">Pendientes</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-n" id="stDone" style="color:var(--green)">0</div>
-      <div class="stat-l">Firmadas</div>
-    </div>
+    <div class="stat-box"><div class="stat-n" id="stTotal">0</div><div class="stat-l">Total</div></div>
+    <div class="stat-box"><div class="stat-n" id="stPend" style="color:var(--accent-dark)">0</div><div class="stat-l">Pendientes</div></div>
+    <div class="stat-box"><div class="stat-n" id="stDone" style="color:var(--green)">0</div><div class="stat-l">Firmadas</div></div>
   </div>
-
-  <div id="progressWrap" style="display:none">
-    <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-  </div>
-
-  <div class="queue-header">
-    <div class="section-title">Entregas del día</div>
-  </div>
+  <div id="progressWrap" style="display:none"><div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div></div>
+  <div class="queue-header"><div class="section-title">Entregas del día</div></div>
   <div id="driverList"></div>
 </div>
 
-<!-- ════════════════════════════════
-     REPARTIDOR — FLUJO DE FIRMA
-════════════════════════════════ -->
+<!-- FIRMA -->
 
 <div class="view" id="v-sign">
-  <!-- STEP A: info + receptor -->
   <div id="signStepA">
     <div class="card">
       <div class="card-head">
         <div class="card-ico" style="background:#eff6ff">📋</div>
-        <div>
-          <div class="card-title" id="signClientTitle">Cliente</div>
-          <div class="card-desc" id="signClientSub">Detalles de entrega</div>
-        </div>
+        <div><div class="card-title" id="signClientTitle">Cliente</div><div class="card-desc">Confirma los datos antes de firmar</div></div>
       </div>
       <div class="card-body">
         <div class="sign-summary" id="signSummary"></div>
-        <div class="form-row" style="margin-bottom:0">
-          <label class="label">Nombre del receptor</label>
-          <input class="input" id="inReceptor" placeholder="Nombre de quien recibe">
-        </div>
+        <div><label class="label">Nombre del receptor</label><input class="input" id="inReceptor" placeholder="Nombre de quien recibe"></div>
       </div>
     </div>
     <button class="btn btn-amber" onclick="goSignB()">Continuar a firma →</button>
   </div>
-
-  <!-- STEP B: firma -->
-
   <div id="signStepB" style="display:none">
-    <div class="card">
-      <div class="card-head">
-        <div class="card-ico" style="background:#ecfdf5">✍️</div>
-        <div>
-          <div class="card-title">Firma del receptor</div>
-          <div class="card-desc">Pide que firme con el dedo</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="sig-wrap">
-          <canvas id="sigCanvas"></canvas>
-          <div class="sig-hint" id="sigHint">
-            <div class="sig-hint-icon">✍️</div>
-            <div class="sig-hint-text">Firma aquí</div>
-          </div>
-        </div>
-        <div class="sig-bar">
-          <div class="text-sm text-muted" id="sigStatus">Sin firma</div>
-          <button class="sig-clear" onclick="clearSig()">🗑 Borrar</button>
-        </div>
-      </div>
+    <!-- TERMS BOX -->
+    <div style="background:#fffbeb; border:1.5px solid #fcd34d; border-radius:var(--rs); padding:14px 15px; margin-bottom:12px;">
+      <div style="font-size:11px; font-weight:800; color:var(--accent-dark); letter-spacing:.6px; text-transform:uppercase; margin-bottom:8px;">📋 Declaración de recepción</div>
+      <div id="termsText" style="font-size:12px; color:var(--ink3); line-height:1.7; margin-bottom:10px;"></div>
+      <label style="display:flex; align-items:flex-start; gap:10px; cursor:pointer;">
+        <input type="checkbox" id="termsCheck" onchange="checkTerms()" style="margin-top:2px; width:18px; height:18px; accent-color:var(--green); flex-shrink:0;">
+        <span style="font-size:12px; font-weight:600; color:var(--ink3);">He leído y acepto los términos. Al firmar confirmo haber recibido la mercancía descrita.</span>
+      </label>
     </div>
-    <div class="btn-row">
-      <button class="btn-back" onclick="backToSignA()">←</button>
-      <button class="btn btn-green" onclick="confirmarFirma()" style="flex:1">✅ Confirmar entrega</button>
+
+```
+<div class="card" id="sigCard" style="opacity:.4; pointer-events:none; transition: opacity .3s;">
+  <div class="card-head">
+    <div class="card-ico" style="background:#ecfdf5">✍️</div>
+    <div><div class="card-title">Firma del receptor</div><div class="card-desc">Firma con el dedo para confirmar</div></div>
+  </div>
+  <div class="card-body">
+    <div class="sig-wrap">
+      <canvas id="sigCanvas"></canvas>
+      <div class="sig-hint" id="sigHint"><div class="sig-hint-icon">✍️</div><div class="sig-hint-text">Acepta los términos primero</div></div>
+    </div>
+    <div class="sig-bar">
+      <div style="font-size:11px; color:var(--muted)" id="sigStatus">Sin firma</div>
+      <button class="sig-clear" onclick="clearSig()">🗑 Borrar</button>
     </div>
   </div>
 </div>
+<div class="btn-row">
+  <button class="btn-back" onclick="backToSignA()">←</button>
+  <button class="btn btn-green" onclick="confirmarFirma()" style="flex:1" id="btnConfirmar" disabled>✅ Confirmar entrega</button>
+</div>
+```
 
-<!-- ════════════════════════════════
-     HISTORIAL
-════════════════════════════════ -->
+  </div>
+</div>
+
+<!-- CARPETAS -->
 
 <div class="view" id="v-hist">
+  <div id="folderTabs" class="folder-tabs"></div>
   <div id="histList"></div>
 </div>
 
-<!-- BOTTOM NAV -->
-
-<div class="bnav" id="bnav">
-  <button class="bnav-item on" id="bn-carga" onclick="goBnav('cargar')">
-    <span class="bnav-icon">📥</span>Cargar
-  </button>
-  <button class="bnav-item" id="bn-lista" onclick="goBnav('lista')">
-    <span class="bnav-icon">🚚</span>Ruta
-  </button>
-  <button class="bnav-item" id="bn-hist" onclick="goBnav('hist')">
-    <span class="bnav-icon">📋</span>Historial
-  </button>
+<div class="bnav">
+  <button class="bnav-item on" id="bn-carga" onclick="goBnav('cargar')"><span class="bnav-icon">📥</span>Cargar</button>
+  <button class="bnav-item" id="bn-lista" onclick="goBnav('lista')"><span class="bnav-icon">🚚</span>Ruta</button>
+  <button class="bnav-item" id="bn-hist" onclick="goBnav('hist')"><span class="bnav-icon">📁</span>Carpetas</button>
 </div>
-
-<!-- SUCCESS OVERLAY -->
 
 <div class="success-overlay" id="successOv">
   <div class="so-check">✅</div>
   <div class="so-title">¡Entrega confirmada!</div>
-  <div class="so-sub" id="so-sub">Comprobante guardado<br>en el historial.</div>
+  <div class="so-sub" id="so-sub">Comprobante guardado.</div>
+  <div class="so-folder" id="so-folder">📁 Carpeta cliente</div>
   <div class="so-receipt" id="so-receipt"></div>
   <div style="display:flex; gap:10px; width:100%; max-width:320px; flex-direction:column">
     <button class="btn btn-green" onclick="downloadReceipt()">⬇️ Descargar comprobante PDF</button>
@@ -536,197 +351,144 @@ padding: 12px 14px; margin-bottom: 14px;
   </div>
 </div>
 
-<!-- TOAST -->
+<div class="modal-overlay" id="detailModal" onclick="closeModal()">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-handle"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div id="modalContent"></div>
+    <button class="btn btn-outline" style="margin-top:14px" onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════
-// STATE
-// ══════════════════════════════════════
-let queue    = JSON.parse(localStorage.getItem('emaz_queue')    || '[]'); // pending deliveries
-let history  = JSON.parse(localStorage.getItem('emaz_history')  || '[]');
-let mode     = 'oficina'; // oficina | repartidor
-
-// temp state for upload
-let pendingExtract = null; // { client, factura, address, raw }
-
-// temp state for signing
+let queue   = JSON.parse(localStorage.getItem('emaz_q3')   || '[]');
+let history = JSON.parse(localStorage.getItem('emaz_h3') || '[]');
+let pendingExtract = null;
 let activeDelivery = null;
-let hasSig = false;
-let sigData = null;
+let hasSig = false, sigData = null;
+let activeFolder = 'Todos';
 
-// ══════════════════════════════════════
-// INIT
-// ══════════════════════════════════════
+const CLIENTS = {
+  'Dportenis':     { bg: '#eff6ff', emoji: '🏃' },
+  'Pueblo Bonito': { bg: '#ecfdf5', emoji: '🏨' },
+  'Petroil':       { bg: '#fef3c7', emoji: '⛽' },
+};
+function cc(name) { return CLIENTS[name] || { bg: '#f3f4f6', emoji: '📦' }; }
+
 document.addEventListener('DOMContentLoaded', () => {
-  initSigPad();
-  renderQueue();
-  renderDriverList();
-  renderHistory();
-  showView('v-cargar');
+  initSigPad(); renderQueue(); renderDriverList(); renderFolders(); showView('v-cargar');
 });
 
-// ══════════════════════════════════════
-// MODE
-// ══════════════════════════════════════
 function setMode(m) {
-  mode = m;
-  document.getElementById('modeOfi').classList.toggle('active', m === 'oficina');
-  document.getElementById('modeRep').classList.toggle('active', m === 'repartidor');
-
-  if (m === 'oficina') {
-    goBnav('cargar');
-  } else {
-    goBnav('lista');
-  }
+  document.getElementById('modeOfi').classList.toggle('active', m==='oficina');
+  document.getElementById('modeRep').classList.toggle('active', m==='repartidor');
+  goBnav(m==='oficina' ? 'cargar' : 'lista');
 }
 
-// ══════════════════════════════════════
-// NAV
-// ══════════════════════════════════════
-function showView(id) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('show'));
-  document.getElementById(id).classList.add('show');
-}
-
+function showView(id) { document.querySelectorAll('.view').forEach(v=>v.classList.remove('show')); document.getElementById(id).classList.add('show'); }
 function goBnav(tab) {
-  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('on'));
-  const map = { cargar: 'bn-carga', lista: 'bn-lista', hist: 'bn-hist' };
-  if (map[tab]) document.getElementById(map[tab]).classList.add('on');
-
-  const viewMap = { cargar: 'v-cargar', lista: 'v-lista', hist: 'v-hist' };
-  if (viewMap[tab]) showView(viewMap[tab]);
+  document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('on'));
+  ({cargar:'bn-carga',lista:'bn-lista',hist:'bn-hist'})[tab] && document.getElementById(({cargar:'bn-carga',lista:'bn-lista',hist:'bn-hist'})[tab]).classList.add('on');
+  const vm = {cargar:'v-cargar',lista:'v-lista',hist:'v-hist'};
+  if (vm[tab]) { showView(vm[tab]); if (tab==='hist') renderFolders(); }
 }
 
-// ══════════════════════════════════════
-// FILE UPLOAD + AI EXTRACTION
-// ══════════════════════════════════════
-function handleFiles(evt) {
-  const file = evt.target.files[0];
-  if (!file) return;
-
+function handleFile(evt) {
+  const file = evt.target.files[0]; if (!file) return;
   resetExtract();
   document.getElementById('analyzeStatus').style.display = 'block';
   document.getElementById('btnAgregar').disabled = true;
-
-  // Read file for possible image preview / base64 for AI
   const reader = new FileReader();
-  reader.onload = async (e) => {
-    const dataUrl = e.target.result;
-    await extractWithAI(file.name, dataUrl, file.type);
-  };
+  reader.onload = async (e) => await extractWithAI(file.name, e.target.result, file.type);
   reader.readAsDataURL(file);
 }
 
 async function extractWithAI(fileName, dataUrl, mimeType) {
   try {
-    // Build message content
     const content = [];
-
-    // If it's an image, send as image
     if (mimeType.startsWith('image/')) {
-      content.push({
-        type: 'image',
-        source: { type: 'base64', media_type: mimeType, data: dataUrl.split(',')[1] }
-      });
+      content.push({ type:'image', source:{ type:'base64', media_type:mimeType, data:dataUrl.split(',')[1] } });
     } else if (mimeType === 'application/pdf') {
-      content.push({
-        type: 'document',
-        source: { type: 'base64', media_type: 'application/pdf', data: dataUrl.split(',')[1] }
-      });
+      content.push({ type:'document', source:{ type:'base64', media_type:'application/pdf', data:dataUrl.split(',')[1] } });
     }
-
-    content.push({
-      type: 'text',
-      text: `Analiza este documento de factura/comprobante y extrae la siguiente información en JSON puro (sin markdown):
+    content.push({ type:'text', text:`Analiza esta factura y extrae TODOS los datos disponibles. Responde SOLO JSON sin markdown:
 {
-  "cliente": "nombre del cliente o empresa a quien se entrega",
-  "noFactura": "número de factura o folio",
-  "direccion": "dirección de entrega si aparece, sino null",
-  "monto": "monto total si aparece, sino null"
-}
-Si no encuentras algún dato, pon null. Solo responde el JSON, nada más.`
-    });
+  "empresa": "nombre completo del cliente (a quien se entrega)",
+  "emisor": "nombre o razon social de quien emite",
+  "noFactura": "numero de factura o folio",
+  "ordenCompra": "numero de orden de compra o null",
+  "fecha": "fecha de la factura o null",
+  "fechaVencimiento": "fecha vencimiento o null",
+  "subtotal": "subtotal o null",
+  "impuestos": "IVA/impuestos o null",
+  "total": "total con simbolo moneda o null",
+  "moneda": "MXN/USD u otra o null",
+  "rfcEmisor": "RFC emisor o null",
+  "rfcReceptor": "RFC receptor o null",
+  "descripcion": "descripcion breve productos/servicios o null",
+  "condicionesPago": "condiciones de pago o null",
+  "direccionEntrega": "direccion de entrega si aparece o null"
+}` });
 
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        messages: [{ role: 'user', content }]
-      })
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ model:'claude-sonnet-4-20250514', max_tokens:600, messages:[{role:'user',content}] })
     });
-
     const data = await resp.json();
-    let text = data.content?.map(c => c.text || '').join('') || '';
-    text = text.replace(/```json|```/g, '').trim();
-    const parsed = JSON.parse(text);
-
-    pendingExtract = {
-      cliente: parsed.cliente || inferClientFromName(fileName),
-      noFactura: parsed.noFactura || fileName.replace(/\.[^.]+$/, ''),
-      direccion: parsed.direccion || '',
-      monto: parsed.monto || '',
-      fileName
-    };
-
-  } catch (err) {
-    // Fallback: infer from filename
-    pendingExtract = {
-      cliente: inferClientFromName(fileName),
-      noFactura: fileName.replace(/\.[^.]+$/, ''),
-      direccion: '',
-      monto: '',
-      fileName
-    };
+    let text = data.content?.map(c=>c.text||'').join('') || '';
+    text = text.replace(/```json|```/g,'').trim();
+    pendingExtract = { ...JSON.parse(text), fileName };
+  } catch(err) {
+    pendingExtract = { empresa: inferClient(fileName), noFactura: fileName.replace(/\.[^.]+$/,''), fileName };
   }
-
   showExtracted();
 }
 
-function inferClientFromName(name) {
+function inferClient(name) {
   const n = name.toLowerCase();
-  if (n.includes('dportenis') || n.includes('deportenis')) return 'Dportenis';
-  if (n.includes('pueblo') || n.includes('bonito')) return 'Pueblo Bonito';
-  if (n.includes('petroil') || n.includes('petro')) return 'Petroil';
+  if (n.includes('dportenis')||n.includes('deportenis')) return 'Dportenis';
+  if (n.includes('pueblo')||n.includes('bonito')) return 'Pueblo Bonito';
+  if (n.includes('petroil')||n.includes('petro')) return 'Petroil';
   return 'Cliente';
 }
 
 function showExtracted() {
   document.getElementById('analyzeStatus').style.display = 'none';
-
-  const grid = document.getElementById('extractGrid');
   const e = pendingExtract;
-  grid.innerHTML = `
-    <div class="extract-item">
-      <div class="extract-key">Cliente</div>
-      <div class="extract-val">${e.cliente || '—'}</div>
-    </div>
-    <div class="extract-item">
-      <div class="extract-key">No. Factura</div>
-      <div class="extract-val mono">${e.noFactura || '—'}</div>
-    </div>
-    ${e.monto ? `<div class="extract-item">
-      <div class="extract-key">Monto</div>
-      <div class="extract-val">$${e.monto}</div>
-    </div>` : ''}
-    <div class="extract-item">
-      <div class="extract-key">Archivo</div>
-      <div class="extract-val" style="font-size:11px; word-break:break-all">${e.fileName}</div>
-    </div>
-  `;
+  document.getElementById('invEmpresa').textContent = e.empresa || '—';
+  const totalEl = document.getElementById('invTotal');
+  if (e.total && e.total !== 'null') { totalEl.textContent = e.total; totalEl.style.display = 'block'; }
+  else totalEl.style.display = 'none';
 
-  if (e.direccion) document.getElementById('inDireccion').value = e.direccion;
+  const fields = [
+    {k:'No. Factura', v:e.noFactura, mono:true},
+    {k:'Orden de Compra', v:e.ordenCompra, mono:true},
+    {k:'Fecha Factura', v:e.fecha},
+    {k:'Vencimiento', v:e.fechaVencimiento},
+    {k:'Subtotal', v:e.subtotal},
+    {k:'Impuestos/IVA', v:e.impuestos},
+    {k:'Moneda', v:e.moneda},
+    {k:'Cond. de Pago', v:e.condicionesPago},
+    {k:'RFC Emisor', v:e.rfcEmisor, mono:true},
+    {k:'RFC Receptor', v:e.rfcReceptor, mono:true},
+    {k:'Emisor', v:e.emisor, full:true},
+    {k:'Descripción', v:e.descripcion, full:true},
+  ].filter(f => f.v && f.v !== 'null' && f.v !== null);
 
-  document.getElementById('extractBox').classList.add('show');
+  document.getElementById('invGrid').innerHTML = fields.map(f =>
+    `<div class="inv-field${f.full?' full':''}"><div class="inv-key">${f.k}</div><div class="inv-val${f.mono?' mono':''}">${f.v}</div></div>`
+  ).join('');
+
+  if (e.direccionEntrega && e.direccionEntrega !== 'null') document.getElementById('inDireccion').value = e.direccionEntrega;
+  document.getElementById('invoiceBox').classList.add('show');
   document.getElementById('btnAgregar').disabled = false;
 }
 
 function resetExtract() {
   pendingExtract = null;
-  document.getElementById('extractBox').classList.remove('show');
+  document.getElementById('invoiceBox').classList.remove('show');
   document.getElementById('analyzeStatus').style.display = 'none';
   document.getElementById('inDireccion').value = '';
   document.getElementById('inNotas').value = '';
@@ -734,421 +496,388 @@ function resetExtract() {
   document.getElementById('btnAgregar').disabled = true;
 }
 
-// ══════════════════════════════════════
-// QUEUE
-// ══════════════════════════════════════
 function agregarEntrega() {
   if (!pendingExtract) return;
-
+  const e = pendingExtract;
   const entrega = {
     id: Date.now(),
-    cliente: pendingExtract.cliente,
-    noFactura: pendingExtract.noFactura,
-    monto: pendingExtract.monto,
-    fileName: pendingExtract.fileName,
+    cliente: e.empresa || 'Cliente',
+    emisor: e.emisor, noFactura: e.noFactura || '—',
+    ordenCompra: e.ordenCompra, fechaFactura: e.fecha,
+    fechaVencimiento: e.fechaVencimiento,
+    subtotal: e.subtotal, impuestos: e.impuestos,
+    total: e.total, moneda: e.moneda,
+    rfcEmisor: e.rfcEmisor, rfcReceptor: e.rfcReceptor,
+    descripcion: e.descripcion, condicionesPago: e.condicionesPago,
+    fileName: e.fileName,
     direccion: document.getElementById('inDireccion').value.trim(),
     notas: document.getElementById('inNotas').value.trim(),
-    status: 'pending',
-    creadaAt: new Date().toISOString(),
+    status: 'pending', creadaAt: new Date().toISOString(),
   };
-
   queue.push(entrega);
-  saveQueue();
-  renderQueue();
-  renderDriverList();
-  resetExtract();
+  localStorage.setItem('emaz_q3', JSON.stringify(queue));
+  renderQueue(); renderDriverList(); resetExtract();
   toast('✅ Entrega agregada a la ruta', 'ok');
 }
 
 function removeFromQueue(id) {
-  queue = queue.filter(e => e.id !== id);
-  saveQueue();
-  renderQueue();
-  renderDriverList();
-}
-
-function saveQueue() {
-  localStorage.setItem('emaz_queue', JSON.stringify(queue));
+  queue = queue.filter(e=>e.id!==id);
+  localStorage.setItem('emaz_q3', JSON.stringify(queue));
+  renderQueue(); renderDriverList();
 }
 
 function renderQueue() {
-  const list = document.getElementById('queueList');
   const count = queue.length;
-  document.getElementById('queueCount').textContent = `${count} entrega${count !== 1 ? 's' : ''}`;
-
-  if (count === 0) {
-    list.innerHTML = `<div class="empty"><div class="empty-ico">📭</div><div class="empty-title">Sin entregas cargadas</div><div class="empty-sub">Sube facturas para armar la ruta de hoy</div></div>`;
+  document.getElementById('queueCount').textContent = `${count} entrega${count!==1?'s':''}`;
+  if (count===0) {
+    document.getElementById('queueList').innerHTML = `<div class="empty"><div class="empty-ico">📭</div><div class="empty-title">Sin entregas cargadas</div><div class="empty-sub">Sube facturas para armar la ruta de hoy</div></div>`;
     return;
   }
-
-  const emojiMap = { 'Dportenis': '🏃', 'Pueblo Bonito': '🏨', 'Petroil': '⛽' };
-  const colorMap = { 'Dportenis': '#eff6ff', 'Pueblo Bonito': '#ecfdf5', 'Petroil': '#fef3c7' };
-
-  list.innerHTML = queue.map((e, i) => {
-    const em = emojiMap[e.cliente] || '📦';
-    const bg = colorMap[e.cliente] || '#f3f4f6';
-    const statusHtml = e.status === 'done'
-      ? '<span class="status status-done">Firmada ✓</span>'
-      : '<span class="status status-pending">Pendiente</span>';
-    return `
-      <div class="queue-item" style="animation-delay:${i * 0.05}s">
-        <div class="qi-dot" style="background:${bg}">${em}</div>
-        <div class="qi-info">
-          <div class="qi-client">${e.cliente}</div>
-          ${e.direccion ? `<div class="qi-meta">📍 ${e.direccion}</div>` : ''}
-          <div class="qi-factura">${e.noFactura}</div>
-        </div>
-        <div class="qi-right">
-          ${statusHtml}
-          ${e.status !== 'done' ? `<button class="qi-del" onclick="removeFromQueue(${e.id})" title="Eliminar">🗑</button>` : ''}
-        </div>
-      </div>`;
+  document.getElementById('queueList').innerHTML = queue.map((e,i) => {
+    const {bg,emoji} = cc(e.cliente); const isDone = e.status==='done';
+    return `<div class="queue-item" style="animation-delay:${i*.05}s">
+      <div class="qi-dot" style="background:${bg}">${emoji}</div>
+      <div class="qi-info">
+        <div class="qi-client">${e.cliente}</div>
+        <div class="qi-meta">${e.total&&e.total!=='null'?'💰 '+e.total+' ':''}${e.direccion?'📍 '+e.direccion:''}</div>
+        <div class="qi-fac">${e.noFactura}${e.ordenCompra&&e.ordenCompra!=='null'?' · OC: '+e.ordenCompra:''}</div>
+      </div>
+      <div class="qi-right">
+        <span class="status ${isDone?'status-done':'status-pending'}">${isDone?'Firmada ✓':'Pendiente'}</span>
+        ${!isDone?`<button class="qi-del" onclick="removeFromQueue(${e.id})">🗑</button>`:''}
+      </div>
+    </div>`;
   }).join('');
 }
 
-// ══════════════════════════════════════
-// DRIVER LIST
-// ══════════════════════════════════════
 function renderDriverList() {
-  const list = document.getElementById('driverList');
-  const total = queue.length;
-  const done = queue.filter(e => e.status === 'done').length;
-  const pend = total - done;
-
+  const total = queue.length, done = queue.filter(e=>e.status==='done').length, pend = total-done;
   document.getElementById('stTotal').textContent = total;
   document.getElementById('stPend').textContent  = pend;
   document.getElementById('stDone').textContent  = done;
-
-  const pw = document.getElementById('progressWrap');
-  const pb = document.getElementById('progressBar');
-  if (total > 0) {
-    pw.style.display = 'block';
-    pb.style.width = `${Math.round((done/total)*100)}%`;
-  } else { pw.style.display = 'none'; }
-
-  if (total === 0) {
-    list.innerHTML = `<div class="empty"><div class="empty-ico">🚚</div><div class="empty-title">No hay entregas para hoy</div><div class="empty-sub">Pide a oficina que cargue las facturas</div></div>`;
+  const pw = document.getElementById('progressWrap'), pb = document.getElementById('progressBar');
+  if (total>0) { pw.style.display='block'; pb.style.width=`${Math.round(done/total*100)}%`; } else pw.style.display='none';
+  if (total===0) {
+    document.getElementById('driverList').innerHTML = `<div class="empty"><div class="empty-ico">🚚</div><div class="empty-title">No hay entregas para hoy</div><div class="empty-sub">Pide a oficina que cargue las facturas</div></div>`;
     return;
   }
-
-  const emojiMap = { 'Dportenis': '🏃', 'Pueblo Bonito': '🏨', 'Petroil': '⛽' };
-
-  list.innerHTML = queue.map((e, i) => {
-    const em = emojiMap[e.cliente] || '📦';
-    const isDone = e.status === 'done';
-    return `
-      <div class="dlv-item${isDone ? ' done' : ''}" onclick="${isDone ? '' : `openSign(${e.id})`}">
-        <div class="dlv-top">
-          <div class="dlv-num${isDone ? ' done' : ''}">${isDone ? '✓' : (i+1)}</div>
-          <div style="flex:1; min-width:0">
-            <div class="dlv-client">${em} ${e.cliente}</div>
-            ${e.direccion ? `<div class="dlv-addr">📍 ${e.direccion}</div>` : ''}
-            <div class="dlv-fac">${e.noFactura}</div>
-          </div>
-          <div class="dlv-arrow">${isDone ? '✅' : '›'}</div>
+  document.getElementById('driverList').innerHTML = queue.map((e,i) => {
+    const {emoji} = cc(e.cliente); const isDone = e.status==='done';
+    return `<div class="dlv-item${isDone?' done':''}" onclick="${isDone?'':` openSign(${e.id})`}">
+      <div class="dlv-top">
+        <div class="dlv-num${isDone?' done':''}">${isDone?'✓':i+1}</div>
+        <div style="flex:1;min-width:0">
+          <div class="dlv-client">${emoji} ${e.cliente}</div>
+          ${e.total&&e.total!=='null'?`<div class="dlv-sub">💰 ${e.total}</div>`:''}
+          ${e.direccion?`<div class="dlv-sub">📍 ${e.direccion}</div>`:''}
+          <div class="dlv-fac">${e.noFactura}${e.ordenCompra&&e.ordenCompra!=='null'?' · OC: '+e.ordenCompra:''}</div>
         </div>
-      </div>`;
+        <div style="color:var(--muted2);font-size:18px;margin-left:auto">${isDone?'✅':'›'}</div>
+      </div>
+    </div>`;
   }).join('');
 }
 
-// ══════════════════════════════════════
-// SIGN FLOW
-// ══════════════════════════════════════
 function openSign(id) {
-  activeDelivery = queue.find(e => e.id === id);
-  if (!activeDelivery) return;
-
-  const emojiMap = { 'Dportenis': '🏃', 'Pueblo Bonito': '🏨', 'Petroil': '⛽' };
-  document.getElementById('signClientTitle').textContent = `${emojiMap[activeDelivery.cliente] || '📦'} ${activeDelivery.cliente}`;
-  document.getElementById('signClientSub').textContent = activeDelivery.direccion || 'Sin dirección especificada';
-
-  const summary = document.getElementById('signSummary');
+  activeDelivery = queue.find(e=>e.id===id); if (!activeDelivery) return;
+  const {emoji} = cc(activeDelivery.cliente);
   const now = new Date();
-  summary.innerHTML = `
-    <div class="ss-row"><span class="ss-k">Factura</span><span class="ss-v mono">${activeDelivery.noFactura}</span></div>
-    ${activeDelivery.monto ? `<div class="ss-row"><span class="ss-k">Monto</span><span class="ss-v">$${activeDelivery.monto}</span></div>` : ''}
-    ${activeDelivery.direccion ? `<div class="ss-row"><span class="ss-k">Dirección</span><span class="ss-v">${activeDelivery.direccion}</span></div>` : ''}
-    ${activeDelivery.notas ? `<div class="ss-row"><span class="ss-k">Notas</span><span class="ss-v">${activeDelivery.notas}</span></div>` : ''}
-    <div class="ss-row"><span class="ss-k">Fecha y hora</span><span class="ss-v">${now.toLocaleDateString('es-MX')} ${now.toLocaleTimeString('es-MX', {hour:'2-digit',minute:'2-digit'})}</span></div>
-  `;
+  document.getElementById('signClientTitle').textContent = `${emoji} ${activeDelivery.cliente}`;
+
+  const rows = [
+    ['No. Factura', activeDelivery.noFactura],
+    activeDelivery.ordenCompra && activeDelivery.ordenCompra!=='null' && ['Orden de Compra', activeDelivery.ordenCompra],
+    activeDelivery.fechaFactura && activeDelivery.fechaFactura!=='null' && ['Fecha Factura', activeDelivery.fechaFactura],
+    activeDelivery.emisor && activeDelivery.emisor!=='null' && ['Emisor', activeDelivery.emisor],
+    activeDelivery.descripcion && activeDelivery.descripcion!=='null' && ['Descripción', activeDelivery.descripcion],
+    activeDelivery.condicionesPago && activeDelivery.condicionesPago!=='null' && ['Cond. Pago', activeDelivery.condicionesPago],
+    activeDelivery.direccion && ['Dirección', activeDelivery.direccion],
+    activeDelivery.notas && ['Notas', activeDelivery.notas],
+    ['Fecha Entrega', now.toLocaleDateString('es-MX')+' '+now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'})],
+  ].filter(Boolean);
+
+  document.getElementById('signSummary').innerHTML = `
+    <div class="ss-head">
+      <div class="ss-empresa">${emoji} ${activeDelivery.cliente}</div>
+      ${activeDelivery.total&&activeDelivery.total!=='null'?`<div class="ss-sub-total">💰 ${activeDelivery.total}</div>`:''}
+    </div>
+    <div class="ss-body">${rows.map(([k,v])=>`<div class="ss-row"><span class="ss-k">${k}</span><span class="ss-v">${v}</span></div>`).join('')}</div>`;
 
   document.getElementById('inReceptor').value = '';
   clearSig();
   document.getElementById('signStepA').style.display = 'block';
   document.getElementById('signStepB').style.display = 'none';
-  showView('v-sign');
-  window.scrollTo({ top: 0 });
+  showView('v-sign'); window.scrollTo({top:0});
 }
 
 function goSignB() {
+  if (!document.getElementById('inReceptor').value.trim()) { toast('⚠️ Ingresa el nombre del receptor','err'); return; }
+
+  // Build dynamic terms text
+  const e = activeDelivery;
   const receptor = document.getElementById('inReceptor').value.trim();
-  if (!receptor) { toast('⚠️ Ingresa el nombre del receptor', 'err'); return; }
-  document.getElementById('signStepA').style.display = 'none';
-  document.getElementById('signStepB').style.display = 'block';
-  window.scrollTo({ top: 0 });
+  const now = new Date();
+  const fecha = now.toLocaleDateString('es-MX', {day:'2-digit', month:'long', year:'numeric'});
+  const hora  = now.toLocaleTimeString('es-MX', {hour:'2-digit', minute:'2-digit'});
+
+  const desc = e.descripcion && e.descripcion !== 'null' ? e.descripcion : 'mercancía según factura';
+  const total = e.total && e.total !== 'null' ? ` por un valor de ${e.total}` : '';
+  const oc = e.ordenCompra && e.ordenCompra !== 'null' ? ` correspondiente a la Orden de Compra ${e.ordenCompra}` : '';
+
+  document.getElementById('termsText').innerHTML =
+    `Yo, <strong>${receptor}</strong>, declaro haber recibido a mi entera satisfacción el día <strong>${fecha}</strong> a las <strong>${hora}</strong>, la siguiente mercancía:<br><br>
+    <strong>${desc}</strong>${total}, amparada bajo la Factura <strong>${e.noFactura}</strong>${oc}, emitida por <strong>${e.emisor && e.emisor!=='null' ? e.emisor : 'el proveedor'}</strong>.<br><br>
+    Al firmar este documento acepto que la mercancía fue recibida en buen estado y en la cantidad indicada, y me hago responsable de la misma a partir de este momento.`;
+
+  // Reset checkbox and sig card
+  document.getElementById('termsCheck').checked = false;
+  document.getElementById('sigCard').style.opacity = '.4';
+  document.getElementById('sigCard').style.pointerEvents = 'none';
+  document.getElementById('btnConfirmar').disabled = true;
+  document.getElementById('sigHint').querySelector('.sig-hint-text').textContent = 'Acepta los términos primero';
+  clearSig();
+
+  document.getElementById('signStepA').style.display='none';
+  document.getElementById('signStepB').style.display='block';
+  window.scrollTo({top:0});
 }
 
-function backToSignA() {
-  document.getElementById('signStepA').style.display = 'block';
-  document.getElementById('signStepB').style.display = 'none';
+function checkTerms() {
+  const checked = document.getElementById('termsCheck').checked;
+  const sigCard = document.getElementById('sigCard');
+  sigCard.style.opacity = checked ? '1' : '.4';
+  sigCard.style.pointerEvents = checked ? 'auto' : 'none';
+  document.getElementById('btnConfirmar').disabled = !checked || !hasSig;
+  if (checked) document.getElementById('sigHint').querySelector('.sig-hint-text').textContent = 'Firma aquí';
 }
+function backToSignA() { document.getElementById('signStepA').style.display='block'; document.getElementById('signStepB').style.display='none'; }
 
 function confirmarFirma() {
-  if (!hasSig) { toast('⚠️ El receptor debe firmar primero', 'err'); return; }
-
-  const now = new Date();
-  const receptor = document.getElementById('inReceptor').value.trim();
-  const emojiMap = { 'Dportenis': '🏃', 'Pueblo Bonito': '🏨', 'Petroil': '⛽' };
-
-  const record = {
-    ...activeDelivery,
-    receptor,
-    firma: sigData,
-    entregadaAt: now.toISOString(),
-    fechaStr: now.toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' }),
-    horaStr: now.toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' }),
+  if (!hasSig) { toast('⚠️ El receptor debe firmar primero','err'); return; }
+  const now = new Date(); const receptor = document.getElementById('inReceptor').value.trim();
+  const {emoji} = cc(activeDelivery.cliente);
+  const record = { ...activeDelivery, receptor, firma:sigData, entregadaAt:now.toISOString(),
+    fechaStr:now.toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'}),
+    horaStr:now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}),
+    carpeta: activeDelivery.cliente,
   };
-
-  // Mark done in queue
-  const idx = queue.findIndex(e => e.id === activeDelivery.id);
-  if (idx >= 0) { queue[idx].status = 'done'; saveQueue(); }
-
-  // Save to history
+  const idx = queue.findIndex(e=>e.id===activeDelivery.id);
+  if (idx>=0) { queue[idx].status='done'; localStorage.setItem('emaz_q3',JSON.stringify(queue)); }
   history.unshift(record);
-  localStorage.setItem('emaz_history', JSON.stringify(history));
+  localStorage.setItem('emaz_h3', JSON.stringify(history));
 
-  // Show success
-  document.getElementById('so-receipt').innerHTML = `
-    <div class="so-row"><span class="so-key">Cliente</span><span class="so-val">${emojiMap[record.cliente] || '📦'} ${record.cliente}</span></div>
-    <div class="so-row"><span class="so-key">Receptor</span><span class="so-val">${receptor}</span></div>
-    <div class="so-row"><span class="so-key">Factura</span><span class="so-val mono">${record.noFactura}</span></div>
-    <div class="so-row"><span class="so-key">Fecha</span><span class="so-val">${record.fechaStr}</span></div>
-    <div class="so-row"><span class="so-key">Hora</span><span class="so-val">${record.horaStr}</span></div>
-  `;
+  document.getElementById('so-folder').textContent = `📁 Guardado en carpeta: ${record.carpeta}`;
+  document.getElementById('so-sub').textContent = `Entrega confirmada y guardada en la carpeta de ${record.carpeta}`;
+  document.getElementById('so-receipt').innerHTML = [
+    ['Cliente', `${emoji} ${record.cliente}`],
+    ['Receptor', receptor],
+    ['No. Factura', record.noFactura],
+    record.ordenCompra&&record.ordenCompra!=='null' && ['Orden Compra', record.ordenCompra],
+    record.total&&record.total!=='null' && ['Total', record.total],
+    ['Fecha', record.fechaStr+' '+record.horaStr],
+  ].filter(Boolean).map(([k,v])=>`<div class="so-row"><span class="so-key">${k}</span><span class="so-val">${v}</span></div>`).join('');
 
   document.getElementById('successOv').classList.add('show');
-  renderDriverList();
-  renderQueue();
+  renderDriverList(); renderQueue();
+}
+
+function closeSuccess() { document.getElementById('successOv').classList.remove('show'); goBnav('lista'); }
+
+// FOLDERS
+function renderFolders() {
+  const all = history.map(h=>h.carpeta||h.cliente);
+  const unique = ['Todos',...new Set(all)];
+  document.getElementById('folderTabs').innerHTML = unique.map(f => {
+    const count = f==='Todos' ? history.length : history.filter(h=>(h.carpeta||h.cliente)===f).length;
+    const {emoji} = cc(f);
+    return `<button class="folder-tab ${activeFolder===f?'active':''}" onclick="setFolder('${f}')">
+      ${f!=='Todos'?emoji+' ':'📋 '}${f}<span class="folder-count">${count}</span>
+    </button>`;
+  }).join('');
   renderHistory();
 }
 
-function closeSuccess() {
-  document.getElementById('successOv').classList.remove('show');
-  goBnav('lista');
-}
+function setFolder(f) { activeFolder=f; renderFolders(); }
 
-// ══════════════════════════════════════
-// PDF RECEIPT DOWNLOAD
-// ══════════════════════════════════════
-function downloadReceipt() {
-  if (!activeDelivery) return;
-
-  const { jsPDF } = window.jspdf;
-  if (!jsPDF) { toast('⚠️ Cargando librería, intenta de nuevo', 'err'); return; }
-
-  const receptor = document.getElementById('inReceptor').value.trim();
-  const now = new Date();
-  const rec = {
-    ...activeDelivery,
-    receptor,
-    fechaStr: now.toLocaleDateString('es-MX', { day:'2-digit', month:'long', year:'numeric' }),
-    horaStr: now.toLocaleTimeString('es-MX', { hour:'2-digit', minute:'2-digit' }),
-  };
-
-  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  const W = 210, margin = 18;
-  let y = 20;
-
-  // ── Header bar ──
-  doc.setFillColor(13, 17, 23);
-  doc.roundedRect(margin, y, W - margin*2, 18, 3, 3, 'F');
-  doc.setTextColor(245, 158, 11);
-  doc.setFontSize(13); doc.setFont('helvetica', 'bold');
-  doc.text('EntregasMaz', margin + 5, y + 7);
-  doc.setTextColor(180, 180, 180);
-  doc.setFontSize(8); doc.setFont('helvetica', 'normal');
-  doc.text('Mazatlan, Sinaloa  |  Comprobante de Entrega', margin + 5, y + 13);
-  y += 26;
-
-  // ── Title ──
-  doc.setTextColor(13, 17, 23);
-  doc.setFontSize(18); doc.setFont('helvetica', 'bold');
-  doc.text('Comprobante de Entrega', margin, y);
-  y += 5;
-  doc.setDrawColor(245, 158, 11);
-  doc.setLineWidth(1);
-  doc.line(margin, y, margin + 80, y);
-  y += 10;
-
-  // ── Details table ──
-  const rows = [
-    ['Cliente',   rec.cliente],
-    ['No. Factura', rec.noFactura],
-  ];
-  if (rec.monto)     rows.push(['Monto', `$${rec.monto}`]);
-  if (rec.direccion) rows.push(['Direccion', rec.direccion]);
-  rows.push(['Receptor', rec.receptor]);
-  rows.push(['Fecha', rec.fechaStr]);
-  rows.push(['Hora', rec.horaStr]);
-  if (rec.notas) rows.push(['Notas', rec.notas]);
-
-  rows.forEach(([k, v], i) => {
-    const bg = i % 2 === 0;
-    if (bg) {
-      doc.setFillColor(249, 250, 251);
-      doc.rect(margin, y - 4, W - margin*2, 9, 'F');
-    }
-    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
-    doc.setTextColor(107, 114, 128);
-    doc.text(k, margin + 3, y + 1);
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(13, 17, 23);
-    doc.text(String(v), margin + 55, y + 1);
-    y += 9;
-  });
-
-  y += 8;
-
-  // ── Signature ──
-  doc.setFontSize(9); doc.setFont('helvetica', 'bold');
-  doc.setTextColor(107, 114, 128);
-  doc.text('FIRMA DEL RECEPTOR', margin, y);
-  y += 4;
-
-  if (sigData) {
-    try {
-      doc.addImage(sigData, 'PNG', margin, y, 80, 35);
-      y += 40;
-    } catch(e) {
-      doc.setDrawColor(229, 231, 235);
-      doc.setLineWidth(0.5);
-      doc.roundedRect(margin, y, 80, 35, 2, 2);
-      y += 40;
-    }
-  } else {
-    doc.setDrawColor(229, 231, 235);
-    doc.setLineWidth(0.5);
-    doc.roundedRect(margin, y, 80, 30, 2, 2);
-    y += 35;
-  }
-
-  // ── Footer ──
-  doc.setFontSize(8); doc.setFont('helvetica', 'normal');
-  doc.setTextColor(156, 163, 175);
-  doc.text(`Generado: ${now.toLocaleString('es-MX')}`, margin, 285);
-  doc.text('EntregasMaz v2.0', W - margin, 285, { align: 'right' });
-
-  const filename = `comprobante-${rec.cliente.replace(/\s+/g,'_')}-${rec.noFactura}.pdf`;
-  doc.save(filename);
-  toast('📥 PDF descargado', 'ok');
-}
-
-// ══════════════════════════════════════
-// HISTORY
-// ══════════════════════════════════════
 function renderHistory() {
-  const list = document.getElementById('histList');
-  if (history.length === 0) {
-    list.innerHTML = `<div class="empty"><div class="empty-ico">📋</div><div class="empty-title">Sin historial</div><div class="empty-sub">Aquí aparecerán las entregas confirmadas</div></div>`;
+  const filtered = activeFolder==='Todos' ? history : history.filter(h=>(h.carpeta||h.cliente)===activeFolder);
+  if (filtered.length===0) {
+    document.getElementById('histList').innerHTML = `<div class="empty"><div class="empty-ico">📁</div><div class="empty-title">Carpeta vacía</div><div class="empty-sub">Las entregas firmadas aparecerán aquí</div></div>`;
     return;
   }
-
-  const emojiMap = { 'Dportenis': '🏃', 'Pueblo Bonito': '🏨', 'Petroil': '⛽' };
-  const colorMap = { 'Dportenis': '#eff6ff', 'Pueblo Bonito': '#ecfdf5', 'Petroil': '#fef3c7' };
-
-  list.innerHTML = `<div class="queue-header"><div class="section-title">Todas las entregas</div><div class="queue-count">${history.length}</div></div>` +
-    history.map((e, i) => {
-      const em = emojiMap[e.cliente] || '📦';
-      const bg = colorMap[e.cliente] || '#f3f4f6';
-      return `
-        <div class="queue-item" style="animation-delay:${i * 0.04}s">
-          <div class="qi-dot" style="background:${bg}">${em}</div>
-          <div class="qi-info">
-            <div class="qi-client">${e.cliente}</div>
-            <div class="qi-meta">Recibió: ${e.receptor || '—'} · ${e.horaStr || ''}</div>
-            <div class="qi-factura">${e.noFactura} ${e.fechaStr ? '· ' + e.fechaStr : ''}</div>
-          </div>
-          <div class="qi-right">
-            <span class="status status-done">Firmada ✓</span>
-          </div>
-        </div>`;
+  document.getElementById('histList').innerHTML =
+    `<div class="queue-header"><div class="section-title">${activeFolder==='Todos'?'Todas las entregas':'📁 '+activeFolder}</div><div class="queue-count">${filtered.length}</div></div>` +
+    filtered.map((e,i) => {
+      const {bg,emoji} = cc(e.cliente);
+      return `<div class="queue-item" style="animation-delay:${i*.04}s;cursor:pointer" onclick="showDetail('${e.entregadaAt}')">
+        <div class="qi-dot" style="background:${bg}">${emoji}</div>
+        <div class="qi-info">
+          <div class="qi-client">${e.cliente}</div>
+          <div class="qi-meta">Recibió: ${e.receptor||'—'} · ${e.horaStr||''}</div>
+          <div class="qi-fac">${e.noFactura}${e.ordenCompra&&e.ordenCompra!=='null'?' · OC:'+e.ordenCompra:''} ${e.total&&e.total!=='null'?'· '+e.total:''}</div>
+        </div>
+        <div class="qi-right">
+          <span class="status status-done">Firmada ✓</span>
+          <div style="font-size:10px;color:var(--muted2)">${e.fechaStr||''}</div>
+        </div>
+      </div>`;
     }).join('');
 }
 
-// ══════════════════════════════════════
+function showDetail(entregadaAt) {
+  const e = history.find(h=>h.entregadaAt===entregadaAt); if (!e) return;
+  const {emoji} = cc(e.cliente);
+  document.getElementById('modalTitle').textContent = `${emoji} ${e.cliente}`;
+  const rows = [
+    ['No. Factura', e.noFactura],
+    e.ordenCompra&&e.ordenCompra!=='null' && ['Orden de Compra', e.ordenCompra],
+    e.total&&e.total!=='null' && ['Total', e.total],
+    e.subtotal&&e.subtotal!=='null' && ['Subtotal', e.subtotal],
+    e.impuestos&&e.impuestos!=='null' && ['Impuestos', e.impuestos],
+    e.moneda&&e.moneda!=='null' && ['Moneda', e.moneda],
+    e.fechaFactura&&e.fechaFactura!=='null' && ['Fecha Factura', e.fechaFactura],
+    e.fechaVencimiento&&e.fechaVencimiento!=='null' && ['Vencimiento', e.fechaVencimiento],
+    e.emisor&&e.emisor!=='null' && ['Emisor', e.emisor],
+    e.rfcEmisor&&e.rfcEmisor!=='null' && ['RFC Emisor', e.rfcEmisor],
+    e.rfcReceptor&&e.rfcReceptor!=='null' && ['RFC Receptor', e.rfcReceptor],
+    e.descripcion&&e.descripcion!=='null' && ['Descripción', e.descripcion],
+    e.condicionesPago&&e.condicionesPago!=='null' && ['Cond. Pago', e.condicionesPago],
+    ['Receptor', e.receptor],
+    ['Fecha Entrega', e.fechaStr+' '+e.horaStr],
+    e.direccion && ['Dirección', e.direccion],
+    e.notas && ['Notas', e.notas],
+    ['Carpeta', '📁 '+(e.carpeta||e.cliente)],
+  ].filter(Boolean);
+  document.getElementById('modalContent').innerHTML =
+    `<div>${rows.map(([k,v])=>`<div class="so-row"><span class="so-key">${k}</span><span class="so-val">${v}</span></div>`).join('')}</div>` +
+    (e.firma?`<div style="margin-top:14px"><div class="label" style="margin-bottom:8px">FIRMA</div><img src="${e.firma}" style="width:100%;border:1px solid var(--line);border-radius:10px;background:white"></div>`:'');
+  document.getElementById('detailModal').classList.add('show');
+}
+
+function closeModal() { document.getElementById('detailModal').classList.remove('show'); }
+
+// PDF
+function downloadReceipt() {
+  if (!activeDelivery) return;
+  const {jsPDF} = window.jspdf; if (!jsPDF) { toast('⚠️ Intenta de nuevo','err'); return; }
+  const receptor = document.getElementById('inReceptor').value.trim();
+  const now = new Date();
+  const rec = {...activeDelivery, receptor,
+    fechaStr:now.toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'}),
+    horaStr:now.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'}),
+  };
+  const doc = new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  const W=210, M=18; let y=20;
+
+  doc.setFillColor(13,17,23); doc.roundedRect(M,y,W-M*2,18,3,3,'F');
+  doc.setTextColor(245,158,11); doc.setFontSize(13); doc.setFont('helvetica','bold');
+  doc.text('EntregasMaz',M+5,y+7);
+  doc.setTextColor(180,180,180); doc.setFontSize(8); doc.setFont('helvetica','normal');
+  doc.text('Mazatlan, Sinaloa  |  Comprobante de Entrega',M+5,y+13);
+  y+=26;
+
+  doc.setTextColor(13,17,23); doc.setFontSize(18); doc.setFont('helvetica','bold');
+  doc.text('Comprobante de Entrega',M,y); y+=5;
+  doc.setDrawColor(245,158,11); doc.setLineWidth(1); doc.line(M,y,M+80,y); y+=12;
+
+  doc.setFillColor(237,233,254); doc.roundedRect(M,y,W-M*2,10,2,2,'F');
+  doc.setTextColor(124,58,237); doc.setFontSize(11); doc.setFont('helvetica','bold');
+  doc.text(`Cliente: ${rec.cliente}`,M+4,y+7); y+=16;
+
+  const rows = [
+    ['No. Factura', rec.noFactura],
+    rec.ordenCompra&&rec.ordenCompra!=='null' && ['Orden de Compra', rec.ordenCompra],
+    rec.fechaFactura&&rec.fechaFactura!=='null' && ['Fecha Factura', rec.fechaFactura],
+    rec.emisor&&rec.emisor!=='null' && ['Emisor', rec.emisor],
+    rec.rfcEmisor&&rec.rfcEmisor!=='null' && ['RFC Emisor', rec.rfcEmisor],
+    rec.rfcReceptor&&rec.rfcReceptor!=='null' && ['RFC Receptor', rec.rfcReceptor],
+    rec.descripcion&&rec.descripcion!=='null' && ['Descripcion', rec.descripcion],
+    rec.condicionesPago&&rec.condicionesPago!=='null' && ['Condiciones Pago', rec.condicionesPago],
+    rec.subtotal&&rec.subtotal!=='null' && ['Subtotal', rec.subtotal],
+    rec.impuestos&&rec.impuestos!=='null' && ['Impuestos/IVA', rec.impuestos],
+    rec.total&&rec.total!=='null' && ['TOTAL', rec.total],
+    rec.moneda&&rec.moneda!=='null' && ['Moneda', rec.moneda],
+    ['separator',''],
+    ['Receptor', receptor],
+    ['Fecha Entrega', rec.fechaStr],
+    ['Hora', rec.horaStr],
+    rec.direccion && ['Direccion', rec.direccion],
+    rec.notas && ['Notas', rec.notas],
+    ['Carpeta', rec.carpeta||rec.cliente],
+  ].filter(Boolean);
+
+  rows.forEach(([k,v],i) => {
+    if (k==='separator') { doc.setDrawColor(220,220,220); doc.setLineWidth(.4); doc.line(M,y-2,W-M,y-2); y+=3; return; }
+    if (y>265) { doc.addPage(); y=20; }
+    if (i%2===0) { doc.setFillColor(249,250,251); doc.rect(M,y-4,W-M*2,9,'F'); }
+    doc.setFontSize(9); doc.setFont('helvetica','normal'); doc.setTextColor(107,114,128);
+    doc.text(k,M+3,y+1);
+    const isTotal = k==='TOTAL';
+    doc.setFont('helvetica','bold'); doc.setTextColor(isTotal?5:13,isTotal?150:17,isTotal?105:23);
+    const lines = doc.splitTextToSize(String(v),90);
+    doc.text(lines,M+60,y+1);
+    y += lines.length>1 ? lines.length*5+2 : 9;
+  });
+
+  y+=8;
+  // Terms declaration in PDF
+  doc.setFillColor(255,251,235); doc.roundedRect(M,y,W-M*2,28,2,2,'F');
+  doc.setDrawColor(252,211,77); doc.setLineWidth(.5); doc.roundedRect(M,y,W-M*2,28,2,2);
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(180,104,0);
+  doc.text('DECLARACIÓN DE RECEPCIÓN',M+4,y+6);
+  doc.setFont('helvetica','normal'); doc.setTextColor(60,60,60);
+  const desc2 = rec.descripcion&&rec.descripcion!=='null' ? rec.descripcion : 'mercancía según factura';
+  const total2 = rec.total&&rec.total!=='null' ? ` por valor de ${rec.total}` : '';
+  const termsTxt = `Yo, ${receptor}, declaro haber recibido a mi entera satisfacción la siguiente mercancía: ${desc2}${total2}, amparada bajo la Factura ${rec.noFactura}. Al firmar confirmo que la mercancía fue recibida en buen estado y me hago responsable de la misma.`;
+  const termsLines = doc.splitTextToSize(termsTxt, W-M*2-8);
+  doc.text(termsLines, M+4, y+12);
+  y += 34;
+
+  doc.setFontSize(9); doc.setFont('helvetica','bold'); doc.setTextColor(107,114,128);
+  doc.text('FIRMA DEL RECEPTOR',M,y); y+=4;
+  if (sigData) { try { doc.addImage(sigData,'PNG',M,y,80,35); } catch(e) { doc.roundedRect(M,y,80,35,2,2); } y+=40; }
+  else { doc.setDrawColor(229,231,235); doc.roundedRect(M,y,80,30,2,2); y+=35; }
+
+  doc.setFontSize(8); doc.setFont('helvetica','normal'); doc.setTextColor(156,163,175);
+  doc.text(`Generado: ${now.toLocaleString('es-MX')}`,M,285);
+  doc.text('EntregasMaz v3.0',W-M,285,{align:'right'});
+  doc.save(`comprobante-${rec.cliente.replace(/\s+/g,'_')}-${rec.noFactura}.pdf`);
+  toast('📥 PDF descargado','ok');
+}
+
 // SIGNATURE PAD
-// ══════════════════════════════════════
 function initSigPad() {
-  const canvas = document.getElementById('sigCanvas');
-  const ctx = canvas.getContext('2d');
-
-  // Resize canvas to actual CSS size
-  function resize() {
-    const r = canvas.getBoundingClientRect();
-    canvas.width = r.width * window.devicePixelRatio;
-    canvas.height = r.height * window.devicePixelRatio;
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  const canvas = document.getElementById('sigCanvas'); const ctx = canvas.getContext('2d');
+  function resize() { const r=canvas.getBoundingClientRect(); canvas.width=r.width*devicePixelRatio; canvas.height=r.height*devicePixelRatio; ctx.scale(devicePixelRatio,devicePixelRatio); }
+  resize(); window.addEventListener('resize',resize);
+  let drawing=false,lx=0,ly=0;
+  function pos(e) { const r=canvas.getBoundingClientRect(),s=e.touches?e.touches[0]:e; return {x:s.clientX-r.left,y:s.clientY-r.top}; }
+  function start(e) { e.preventDefault(); drawing=true; const p=pos(e); lx=p.x; ly=p.y; document.getElementById('sigHint').style.display='none'; }
+  function move(e) {
+    if (!drawing) return; e.preventDefault(); const p=pos(e);
+    ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y);
+    ctx.strokeStyle='#0d1117'; ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
+    lx=p.x; ly=p.y; hasSig=true; sigData=canvas.toDataURL();
+    document.getElementById('sigStatus').textContent='✅ Firma capturada';
+    document.getElementById('sigStatus').style.color='var(--green)';
+    const tc = document.getElementById('termsCheck');
+    if (tc && tc.checked) document.getElementById('btnConfirmar').disabled = false;
   }
-  resize();
-  window.addEventListener('resize', resize);
-
-  let drawing = false, lx = 0, ly = 0;
-
-  function pos(e) {
-    const r = canvas.getBoundingClientRect();
-    const src = e.touches ? e.touches[0] : e;
-    return { x: src.clientX - r.left, y: src.clientY - r.top };
-  }
-
-  canvas.addEventListener('mousedown', e => { drawing = true; const p = pos(e); lx=p.x; ly=p.y; hideSigHint(); });
-  canvas.addEventListener('touchstart', e => { e.preventDefault(); drawing = true; const p = pos(e); lx=p.x; ly=p.y; hideSigHint(); }, { passive: false });
-  canvas.addEventListener('mousemove', e => { if (!drawing) return; draw(ctx, pos(e), {x:lx,y:ly}); const p = pos(e); lx=p.x; ly=p.y; });
-  canvas.addEventListener('touchmove', e => { e.preventDefault(); if (!drawing) return; draw(ctx, pos(e), {x:lx,y:ly}); const p = pos(e); lx=p.x; ly=p.y; }, { passive: false });
-  canvas.addEventListener('mouseup', () => { drawing = false; captureSig(canvas); });
-  canvas.addEventListener('touchend', () => { drawing = false; captureSig(canvas); });
-}
-
-function draw(ctx, curr, last) {
-  ctx.beginPath();
-  ctx.moveTo(last.x, last.y);
-  ctx.lineTo(curr.x, curr.y);
-  ctx.strokeStyle = '#0d1117';
-  ctx.lineWidth = 2.2;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  ctx.stroke();
-}
-
-function hideSigHint() {
-  document.getElementById('sigHint').style.display = 'none';
-}
-
-function captureSig(canvas) {
-  sigData = canvas.toDataURL();
-  hasSig = true;
-  document.getElementById('sigStatus').textContent = '✅ Firma capturada';
-  document.getElementById('sigStatus').style.color = 'var(--green)';
+  function end() { drawing=false; }
+  canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); canvas.addEventListener('mouseup',end);
+  canvas.addEventListener('touchstart',start,{passive:false}); canvas.addEventListener('touchmove',move,{passive:false}); canvas.addEventListener('touchend',end);
 }
 
 function clearSig() {
-  const canvas = document.getElementById('sigCanvas');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  hasSig = false; sigData = null;
-  document.getElementById('sigHint').style.display = 'block';
-  document.getElementById('sigStatus').textContent = 'Sin firma';
-  document.getElementById('sigStatus').style.color = '';
+  const c=document.getElementById('sigCanvas'); c.getContext('2d').clearRect(0,0,c.width,c.height);
+  hasSig=false; sigData=null;
+  document.getElementById('sigHint').style.display='block';
+  document.getElementById('sigStatus').textContent='Sin firma'; document.getElementById('sigStatus').style.color='';
 }
 
-// ══════════════════════════════════════
-// TOAST
-// ══════════════════════════════════════
-function toast(msg, type = '') {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = `toast ${type} show`;
-  clearTimeout(t._t);
-  t._t = setTimeout(() => t.classList.remove('show'), 2800);
+function toast(msg,type='') {
+  const t=document.getElementById('toast'); t.textContent=msg; t.className=`toast ${type} show`;
+  clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),2800);
 }
 </script>
 
