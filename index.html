@@ -413,23 +413,24 @@ async function extractWithAI(fileName, dataUrl, mimeType) {
     } else if (mimeType === 'application/pdf') {
       content.push({ type:'document', source:{ type:'base64', media_type:'application/pdf', data:dataUrl.split(',')[1] } });
     }
-    content.push({ type:'text', text:`Analiza esta factura y extrae TODOS los datos disponibles. Responde SOLO JSON sin markdown:
+    content.push({ type:'text', text:`Eres un experto en facturas CFDI mexicanas. Analiza esta factura y extrae los datos. IMPORTANTE: el campo "empresa" debe ser el NOMBRE DEL RECEPTOR (quien recibe y paga la factura, campo "Nombre receptor" o "RFC receptor"), NO el emisor. Responde SOLO JSON sin markdown ni explicaciones:
 {
-  "empresa": "nombre completo del cliente (a quien se entrega)",
-  "emisor": "nombre o razon social de quien emite",
-  "noFactura": "numero de factura o folio",
-  "ordenCompra": "numero de orden de compra o null",
-  "fecha": "fecha de la factura o null",
-  "fechaVencimiento": "fecha vencimiento o null",
-  "subtotal": "subtotal o null",
-  "impuestos": "IVA/impuestos o null",
-  "total": "total con simbolo moneda o null",
-  "moneda": "MXN/USD u otra o null",
-  "rfcEmisor": "RFC emisor o null",
-  "rfcReceptor": "RFC receptor o null",
-  "descripcion": "descripcion breve productos/servicios o null",
-  "condicionesPago": "condiciones de pago o null",
-  "direccionEntrega": "direccion de entrega si aparece o null"
+  "empresa": "nombre completo del receptor/cliente a quien se le entrega (busca 'Nombre receptor', si solo hay RFC receptor usa ese RFC como nombre)",
+  "emisor": "nombre o razon social de quien emite la factura (campo Emisor)",
+  "noFactura": "numero de folio de la factura (campo Folio)",
+  "ordenCompra": "numero de orden de compra si aparece (busca 'ORDEN DE COMPRA', 'OC', 'Purchase Order'), sino null",
+  "fecha": "fecha de emision de la factura",
+  "fechaVencimiento": "fecha de vencimiento si aparece, sino null",
+  "subtotal": "subtotal antes de impuestos con signo $",
+  "impuestos": "monto de IVA o impuestos con signo $",
+  "total": "monto total final con signo $ y moneda",
+  "moneda": "MXN o USD",
+  "rfcEmisor": "RFC del emisor",
+  "rfcReceptor": "RFC del receptor",
+  "descripcion": "descripcion corta de los productos o servicios (maximo 80 caracteres)",
+  "condicionesPago": "condiciones o metodo de pago si aparece, sino null",
+  "guia": "numero de guia de envio si aparece (DHL, FedEx, etc), sino null",
+  "direccionEntrega": "direccion de entrega si aparece, sino null"
 }` });
 
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -465,6 +466,7 @@ function showExtracted() {
   const fields = [
     {k:'No. Factura', v:e.noFactura, mono:true},
     {k:'Orden de Compra', v:e.ordenCompra, mono:true},
+    {k:'Guía Envío', v:e.guia, mono:true},
     {k:'Fecha Factura', v:e.fecha},
     {k:'Vencimiento', v:e.fechaVencimiento},
     {k:'Subtotal', v:e.subtotal},
@@ -640,6 +642,8 @@ function goSignB() {
   document.getElementById('signStepA').style.display='none';
   document.getElementById('signStepB').style.display='block';
   window.scrollTo({top:0});
+  // Resize canvas now that it's visible
+  setTimeout(() => { if (window.resizeSigCanvas) window.resizeSigCanvas(); }, 50);
 }
 
 function checkTerms() {
@@ -847,25 +851,78 @@ function downloadReceipt() {
 
 // SIGNATURE PAD
 function initSigPad() {
-  const canvas = document.getElementById('sigCanvas'); const ctx = canvas.getContext('2d');
-  function resize() { const r=canvas.getBoundingClientRect(); canvas.width=r.width*devicePixelRatio; canvas.height=r.height*devicePixelRatio; ctx.scale(devicePixelRatio,devicePixelRatio); }
-  resize(); window.addEventListener('resize',resize);
-  let drawing=false,lx=0,ly=0;
-  function pos(e) { const r=canvas.getBoundingClientRect(),s=e.touches?e.touches[0]:e; return {x:s.clientX-r.left,y:s.clientY-r.top}; }
-  function start(e) { e.preventDefault(); drawing=true; const p=pos(e); lx=p.x; ly=p.y; document.getElementById('sigHint').style.display='none'; }
+  const canvas = document.getElementById('sigCanvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false, lx = 0, ly = 0;
+
+  function resizeCanvas() {
+    // Save existing drawing
+    const imgData = hasSig ? canvas.toDataURL() : null;
+    const rect = canvas.getBoundingClientRect();
+    // Only resize if canvas is visible (width > 0)
+    if (rect.width === 0) return;
+    canvas.width  = rect.width  * devicePixelRatio;
+    canvas.height = rect.height * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    ctx.strokeStyle = '#0d1117';
+    ctx.lineWidth   = 2.5;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    // Restore drawing if existed
+    if (imgData) {
+      const img = new Image();
+      img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+      img.src = imgData;
+    }
+  }
+
+  // Resize when step B becomes visible
+  window.resizeSigCanvas = resizeCanvas;
+  window.addEventListener('resize', resizeCanvas);
+
+  function pos(e) {
+    const r = canvas.getBoundingClientRect();
+    const s = e.touches ? e.touches[0] : e;
+    return { x: s.clientX - r.left, y: s.clientY - r.top };
+  }
+
+  function start(e) {
+    e.preventDefault();
+    resizeCanvas(); // ensure correct size on first touch
+    drawing = true;
+    const p = pos(e); lx = p.x; ly = p.y;
+    document.getElementById('sigHint').style.display = 'none';
+  }
+
   function move(e) {
-    if (!drawing) return; e.preventDefault(); const p=pos(e);
-    ctx.beginPath(); ctx.moveTo(lx,ly); ctx.lineTo(p.x,p.y);
-    ctx.strokeStyle='#0d1117'; ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.lineJoin='round'; ctx.stroke();
-    lx=p.x; ly=p.y; hasSig=true; sigData=canvas.toDataURL();
-    document.getElementById('sigStatus').textContent='✅ Firma capturada';
-    document.getElementById('sigStatus').style.color='var(--green)';
+    if (!drawing) return;
+    e.preventDefault();
+    const p = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(lx, ly);
+    ctx.lineTo(p.x, p.y);
+    ctx.strokeStyle = '#0d1117';
+    ctx.lineWidth   = 2.5;
+    ctx.lineCap     = 'round';
+    ctx.lineJoin    = 'round';
+    ctx.stroke();
+    lx = p.x; ly = p.y;
+    hasSig  = true;
+    sigData = canvas.toDataURL();
+    document.getElementById('sigStatus').textContent = '✅ Firma capturada';
+    document.getElementById('sigStatus').style.color = 'var(--green)';
     const tc = document.getElementById('termsCheck');
     if (tc && tc.checked) document.getElementById('btnConfirmar').disabled = false;
   }
-  function end() { drawing=false; }
-  canvas.addEventListener('mousedown',start); canvas.addEventListener('mousemove',move); canvas.addEventListener('mouseup',end);
-  canvas.addEventListener('touchstart',start,{passive:false}); canvas.addEventListener('touchmove',move,{passive:false}); canvas.addEventListener('touchend',end);
+
+  function end() { drawing = false; }
+
+  canvas.addEventListener('mousedown',  start, false);
+  canvas.addEventListener('mousemove',  move,  false);
+  canvas.addEventListener('mouseup',    end,   false);
+  canvas.addEventListener('touchstart', start, { passive: false });
+  canvas.addEventListener('touchmove',  move,  { passive: false });
+  canvas.addEventListener('touchend',   end,   false);
 }
 
 function clearSig() {
